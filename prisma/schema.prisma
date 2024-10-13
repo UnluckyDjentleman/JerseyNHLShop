@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model jerseys {
+  id                Int      @id @default(autoincrement())
+  jerseytitle       String   @db.VarChar(100)
+  jerseydescription String   @db.VarChar(100)
+  teamid            Int?
+  size              Int
+  cost              Decimal  @db.Money
+  jerseyimage       String   @db.VarChar(100)
+  teams             teams?   @relation(fields: [teamid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  orders            orders[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model orders {
+  id           Int      @id @default(autoincrement())
+  userid       Int?
+  jerseyid     Int?
+  userlastname String?  @db.VarChar(100)
+  number       Int?
+  count        Int
+  jerseys      jerseys? @relation(fields: [jerseyid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users        users?   @relation(fields: [userid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model teams {
+  id       Int       @id @default(autoincrement())
+  teamname String    @db.VarChar(100)
+  teamlogo String    @db.VarChar(100)
+  jerseys  jerseys[]
+}
+
+model users {
+  id       Int      @id @default(autoincrement())
+  name     String   @db.VarChar(100)
+  surname  String   @db.VarChar(100)
+  email    String   @unique @db.VarChar(100)
+  password String   @db.VarChar(100)
+  role     String?  @db.VarChar(100)
+  orders   orders[]
+}
