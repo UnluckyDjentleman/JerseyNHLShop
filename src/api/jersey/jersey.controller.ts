@@ -12,8 +12,7 @@ import {
 } from '@nestjs/common';
 import { JerseyService } from './jersey.service';
 import { JerseyDTO } from './dto';
-import { users } from '@prisma/client';
-import { GetUser, Roles } from 'src/auth/decorator';
+import { Roles } from 'src/auth/decorator';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { OrderService } from '../order/order.service';
 import RoleGuard from 'src/auth/guard/role.guard';
@@ -44,13 +43,9 @@ export class JerseyController {
   @Roles('ADMIN')
   @Post()
   @UseInterceptors(FileInterceptor('jerseyImage'))
-  addJersey(
-    @Body() dto: JerseyDTO,
-    @UploadedFile() file,
-    @GetUser() user: users,
-  ) {
+  addJersey(@Body() dto: JerseyDTO, @UploadedFile() file) {
     console.log(file);
-    return this.jerseyService.addNewJersey(dto, file.filename, user);
+    return this.jerseyService.addNewJersey(dto, file.filename);
   }
 
   @UseGuards(RoleGuard)

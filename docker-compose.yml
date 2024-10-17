@@ -6,5 +6,5 @@ services:
     ports:
       - "3000:3000"
     environment:
-      DATABASE_URL: "postgresql://dalvhikki:dalvhikki@192.168.99.100:5432/jerseyshop?schema=public"
+      - .env
     
