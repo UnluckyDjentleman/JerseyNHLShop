@@ -8,12 +8,12 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { OrderService } from '../order/order.service';
 import { JwtService } from '@nestjs/jwt';
 
-const uploadDir=join(process.cwd(),'uploads')
+const uploadDir = join(process.cwd(), 'uploads');
 
 @Module({
-  imports:[
+  imports: [
     MulterModule.register({
-      storage:diskStorage({
+      storage: diskStorage({
         destination: (req, file, cb) => {
           cb(null, uploadDir);
         },
@@ -30,7 +30,7 @@ const uploadDir=join(process.cwd(),'uploads')
           cb(new Error('Only images are allowed...'), false);
         }
       },
-    })
+    }),
   ],
   controllers: [JerseyController],
   providers: [PrismaService, OrderService, JerseyService, JwtService],

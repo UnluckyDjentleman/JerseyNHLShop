@@ -8,12 +8,12 @@ import { UserModule } from './api/user/user.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }), 
-    JerseyModule, 
-    TeamModule, 
-    OrderModule, 
+    ConfigModule.forRoot({ isGlobal: true }),
+    JerseyModule,
+    TeamModule,
+    OrderModule,
     AuthModule,
-    UserModule
-  ]
+    UserModule,
+  ],
 })
 export class AppModule {}

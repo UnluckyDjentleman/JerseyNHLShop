@@ -1,13 +1,13 @@
-import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
-import {users} from '@prisma/client'
-import { UserDTO } from './dto';
+import { Injectable } from '@nestjs/common'
+import { PrismaService } from 'src/prisma/prisma.service'
+import { users } from '@prisma/client';
+import { UserDTO } from './dto'
 
 @Injectable()
 export class UserService {
-    constructor(private prisma: PrismaService){}
+  constructor(private prisma: PrismaService) {}
 
-    async getCurrentUser(user: users){
+  async getCurrentUser(user: users) {
         console.log('User:'+JSON.stringify(user));
         return user;
     }

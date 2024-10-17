@@ -6,12 +6,12 @@ import { diskStorage } from 'multer';
 import { extname, join } from 'path';
 import { PrismaService } from 'src/prisma/prisma.service';
 
-const uploadDir=join(process.cwd(),'uploads')
+const uploadDir = join(process.cwd(), 'uploads');
 
 @Module({
-  imports:[
+  imports: [
     MulterModule.register({
-      storage:diskStorage({
+      storage: diskStorage({
         destination: (req, file, cb) => {
           cb(null, uploadDir);
         },
@@ -28,9 +28,9 @@ const uploadDir=join(process.cwd(),'uploads')
           cb(new Error('Only images are allowed...'), false);
         }
       },
-    })
+    }),
   ],
   controllers: [TeamController],
-  providers: [PrismaService, TeamService]
+  providers: [PrismaService, TeamService],
 })
 export class TeamModule {}

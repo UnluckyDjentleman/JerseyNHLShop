@@ -1,1 +1,1 @@
-export * from './jersey.dto'
+export * from './jersey.dto';

@@ -8,22 +8,22 @@ import { JwtGuard } from 'src/auth/guard';
 @UseGuards(JwtGuard)
 @Controller('users')
 export class UserController {
-    constructor(private userService: UserService){}
+  constructor(private userService: UserService) {}
 
-    @Get('me')
-    getMe(@GetUser() user: users){
-        console.log("Fuck "+JSON.stringify(user));
-        return this.userService.getCurrentUser(user);
-    }
+  @Get('me')
+  getMe(@GetUser() user: users) {
+    console.log('Fuck ' + JSON.stringify(user));
+    return this.userService.getCurrentUser(user);
+  }
 
-    @Roles('ADMIN')
-    @Get('all-users')
-    getAllUsers(page: number){
-        return this.userService.getAllUsers(page)
-    }
+  @Roles('ADMIN')
+  @Get('all-users')
+  getAllUsers(page: number) {
+    return this.userService.getAllUsers(page);
+  }
 
-    @Put('update-user')
-    updateUserInfo(@GetUser() user: users, @Body() dto: UserDTO){
-        return this.userService.updateUserInfo(user, dto)
-    }
+  @Put('update-user')
+  updateUserInfo(@GetUser() user: users, @Body() dto: UserDTO) {
+    return this.userService.updateUserInfo(user, dto);
+  }
 }
